@@ -224,6 +224,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select * from psy_scale_option where question_id = #{questionId} order by option_sort asc
     </select>
 
+    <select id="selectAllOptionsByScaleId" parameterType="Long" resultMap="PsyScaleOptionResult">
+        select o.* from psy_scale_option o
+        inner join psy_scale_question q on o.question_id = q.question_id
+        where q.scale_id = #{scaleId}
+        order by o.option_sort asc
+    </select>
+
     <insert id="insertAssessmentRecord" parameterType="PsyAssessmentRecord" useGeneratedKeys="true" keyProperty="recordId">
         insert into psy_assessment_record
         (student_user_id, scale_id, scale_name, total_score, result_level, result_summary, guidance_advice, warning_flag, create_by, create_time)

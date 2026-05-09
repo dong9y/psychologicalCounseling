@@ -105,9 +105,16 @@ public class PsyCenterServiceImpl implements IPsyCenterService
         PsyScaleDetailVo detailVo = new PsyScaleDetailVo();
         copyScale(scale, detailVo);
         List<PsyScaleQuestion> questions = psyCenterMapper.selectScaleQuestionListByScaleId(scaleId);
-        for (PsyScaleQuestion question : questions)
-        {
-            question.setOptions(psyCenterMapper.selectScaleOptionListByQuestionId(question.getQuestionId()));
+        // 优化：一次查询获取所有选项，避免 N+1 问题
+        List<PsyScaleOption> allOptions = psyCenterMapper.selectAllOptionsByScaleId(scaleId);
+        // 按 questionId 分组
+        Map<Long, List<PsyScaleOption>> optionsMap = new java.util.LinkedHashMap<>();
+        for (PsyScaleOption option : allOptions) {
+            optionsMap.computeIfAbsent(option.getQuestionId(), k -> new java.util.ArrayList<>()).add(option);
+        }
+        // 设置每个问题的选项
+        for (PsyScaleQuestion question : questions) {
+            question.setOptions(optionsMap.getOrDefault(question.getQuestionId(), new java.util.ArrayList<>()));
         }
         detailVo.setQuestions(questions);
         return detailVo;
@@ -136,6 +143,7 @@ public class PsyCenterServiceImpl implements IPsyCenterService
 
         String resultLevel = resolveAssessmentLevel(totalScore, scale.getWarningThreshold(), scale.getMaxScore());
         record.setTotalScore(totalScore);
+        record.setMaxScore(scale.getMaxScore());
         record.setResultLevel(resultLevel);
         record.setResultSummary(buildAssessmentSummary(scale.getScaleName(), totalScore, resultLevel));
         record.setGuidanceAdvice(buildAssessmentAdvice(resultLevel));

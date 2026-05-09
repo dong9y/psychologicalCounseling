@@ -42,6 +42,8 @@ public interface PsyCenterMapper
 
     List<PsyScaleOption> selectScaleOptionListByQuestionId(Long questionId);
 
+    List<PsyScaleOption> selectAllOptionsByScaleId(Long scaleId);
+
     int insertAssessmentRecord(PsyAssessmentRecord record);
 
     int insertAssessmentAnswer(PsyAssessmentAnswer answer);

@@ -17,6 +17,8 @@ public class PsyAssessmentRecord extends BaseEntity
 
     private BigDecimal totalScore;
 
+    private BigDecimal maxScore;
+
     private String resultLevel;
 
     private String resultSummary;
@@ -73,6 +75,16 @@ public class PsyAssessmentRecord extends BaseEntity
     public void setTotalScore(BigDecimal totalScore)
     {
         this.totalScore = totalScore;
+    }
+
+    public BigDecimal getMaxScore()
+    {
+        return maxScore;
+    }
+
+    public void setMaxScore(BigDecimal maxScore)
+    {
+        this.maxScore = maxScore;
     }
 
     public String getResultLevel()

@@ -4,7 +4,7 @@
 
 <script>
 import * as echarts from 'echarts'
-require('echarts/theme/macarons') // echarts theme
+require('echarts/theme/macarons')
 import resize from './mixins/resize'
 
 export default {
@@ -21,11 +21,31 @@ export default {
     height: {
       type: String,
       default: '300px'
+    },
+    chartData: {
+      type: Object,
+      default: () => ({
+        legendData: ['正常', '关注', '中风险', '高风险'],
+        seriesData: [
+          { value: 70, name: '正常' },
+          { value: 20, name: '关注' },
+          { value: 8, name: '中风险' },
+          { value: 2, name: '高风险' }
+        ]
+      })
     }
   },
   data() {
     return {
       chart: null
+    }
+  },
+  watch: {
+    chartData: {
+      deep: true,
+      handler(val) {
+        this.setOptions(val)
+      }
     }
   },
   mounted() {
@@ -43,33 +63,55 @@ export default {
   methods: {
     initChart() {
       this.chart = echarts.init(this.$el, 'macarons')
+      this.setOptions(this.chartData)
+    },
+    setOptions({ legendData, seriesData } = {}) {
+      const colorMap = {
+        '正常': '#67C23A',
+        '关注': '#E6A23C',
+        '中风险': '#F56C6C',
+        '高风险': '#F56C6C'
+      }
 
       this.chart.setOption({
         tooltip: {
           trigger: 'item',
-          formatter: '{a} <br/>{b} : {c} ({d}%)'
+          formatter: '{a} <br/>{b}: {c} ({d}%)'
         },
         legend: {
-          left: 'center',
-          bottom: '10',
-          data: ['Industries', 'Technology', 'Forex', 'Gold', 'Forecasts']
+          orient: 'vertical',
+          right: '10%',
+          top: 'center',
+          data: legendData || ['正常', '关注', '中风险', '高风险'],
+          textStyle: {
+            color: '#606266'
+          }
         },
         series: [
           {
-            name: 'WEEKLY WRITE ARTICLES',
+            name: '风险分布',
             type: 'pie',
             roseType: 'radius',
-            radius: [15, 95],
-            center: ['50%', '38%'],
-            data: [
-              { value: 320, name: 'Industries' },
-              { value: 240, name: 'Technology' },
-              { value: 149, name: 'Forex' },
-              { value: 100, name: 'Gold' },
-              { value: 59, name: 'Forecasts' }
+            radius: ['40%', '70%'],
+            center: ['35%', '50%'],
+            data: seriesData || [
+              { value: 70, name: '正常' },
+              { value: 20, name: '关注' },
+              { value: 8, name: '中风险' },
+              { value: 2, name: '高风险' }
             ],
             animationEasing: 'cubicInOut',
-            animationDuration: 2600
+            animationDuration: 2600,
+            itemStyle: {
+              normal: {
+                color: function(params) {
+                  return colorMap[params.name] || '#409EFF'
+                }
+              }
+            },
+            label: {
+              show: false
+            }
           }
         ]
       })

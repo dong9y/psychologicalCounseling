@@ -4,7 +4,7 @@
 
 <script>
 import * as echarts from 'echarts'
-require('echarts/theme/macarons') // echarts theme
+require('echarts/theme/macarons')
 import resize from './mixins/resize'
 
 export default {
@@ -28,7 +28,11 @@ export default {
     },
     chartData: {
       type: Object,
-      required: true
+      default: () => ({
+        xData: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        expectedData: [85, 78, 90, 82, 88, 92, 87],
+        actualData: [80, 75, 88, 78, 85, 90, 84]
+      })
     }
   },
   data() {
@@ -61,15 +65,8 @@ export default {
       this.chart = echarts.init(this.$el, 'macarons')
       this.setOptions(this.chartData)
     },
-    setOptions({ expectedData, actualData } = {}) {
+    setOptions({ xData, expectedData, actualData } = {}) {
       this.chart.setOption({
-        xAxis: {
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-          boundaryGap: false,
-          axisTick: {
-            show: false
-          }
-        },
         grid: {
           left: 10,
           right: 10,
@@ -84,21 +81,64 @@ export default {
           },
           padding: [5, 10]
         },
+        xAxis: {
+          data: xData || ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          boundaryGap: false,
+          axisTick: {
+            show: false
+          },
+          axisLabel: {
+            color: '#909399'
+          },
+          axisLine: {
+            lineStyle: {
+              color: '#E4E7ED'
+            }
+          }
+        },
         yAxis: {
           axisTick: {
             show: false
+          },
+          axisLabel: {
+            color: '#909399'
+          },
+          axisLine: {
+            lineStyle: {
+              color: '#E4E7ED'
+            }
+          },
+          splitLine: {
+            lineStyle: {
+              color: '#F0F2F5'
+            }
           }
         },
         legend: {
-          data: ['expected', 'actual']
+          data: ['情绪指数', '上周同期'],
+          textStyle: {
+            color: '#606266'
+          },
+          top: 0
         },
         series: [{
-          name: 'expected', itemStyle: {
+          name: '情绪指数',
+          itemStyle: {
             normal: {
-              color: '#FF005A',
+              color: '#409EFF',
               lineStyle: {
-                color: '#FF005A',
+                color: '#409EFF',
                 width: 2
+              },
+              areaStyle: {
+                color: {
+                  type: 'linear',
+                  x: 0, y: 0, x2: 0, y2: 1,
+                  colorStops: [
+                    { offset: 0, color: 'rgba(64, 158, 255, 0.3)' },
+                    { offset: 1, color: 'rgba(64, 158, 255, 0.05)' }
+                  ]
+                }
               }
             }
           },
@@ -109,18 +149,16 @@ export default {
           animationEasing: 'cubicInOut'
         },
         {
-          name: 'actual',
+          name: '上周同期',
           smooth: true,
           type: 'line',
           itemStyle: {
             normal: {
-              color: '#3888fa',
+              color: '#67C23A',
               lineStyle: {
-                color: '#3888fa',
-                width: 2
-              },
-              areaStyle: {
-                color: '#f3f8ff'
+                color: '#67C23A',
+                width: 2,
+                type: 'dashed'
               }
             }
           },
