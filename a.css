@@ -1,0 +1,71 @@
+/* 左侧菜单栏整体 */
+.sidebar {
+    width: 240px;
+    background-color: #1B263B; /* 侧边栏背景 */
+    color: #CBD5E1;            /* 默认文字颜色 */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+/* 菜单项 */
+.sidebar .menu-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+/* 图标和文字 */
+.sidebar .menu-item i {
+    margin-right: 10px;
+    color: #94A3B8; /* 图标/文字次要颜色 */
+}
+
+/* 悬停状态 */
+.sidebar .menu-item:hover {
+    background-color: #3B82F6; /* hover 背景 */
+    color: #FFFFFF;             /* hover 文字颜色 */
+}
+
+.sidebar .menu-item:hover i {
+    color: #FFFFFF;             /* hover 图标颜色 */
+}
+
+/* 选中状态 */
+.sidebar .menu-item.active {
+    background-color: #2563EB; /* 选中背景 */
+    color: #FFFFFF;             /* 选中文字 */
+}
+
+.sidebar .menu-item.active i {
+    color: #FFFFFF;             /* 选中图标 */
+}
+
+/* 禁用状态 */
+.sidebar .menu-item.disabled {
+    background-color: #1B263B; /* 深色背景 */
+    color: #94A3B8;             /* 灰色文字 */
+    cursor: not-allowed;
+}
+
+.sidebar .menu-item.disabled i {
+    color: #94A3B8;
+}
+
+/* 分割线/底部退出 */
+.sidebar .divider {
+    border-top: 1px solid #E2E8F0; /* 分割线颜色 */
+    margin: 8px 0;
+}
+
+/* 可选：logo区域 */
+.sidebar .logo {
+    padding: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #FFFFFF;
+}

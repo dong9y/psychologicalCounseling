@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.PsyCenterMapper">
+
+    <resultMap id="PsyStudentProfileResult" type="PsyStudentProfile">
+        <id property="studentId" column="student_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="studentNo" column="student_no"/>
+        <result property="realName" column="real_name"/>
+        <result property="college" column="college"/>
+        <result property="major" column="major"/>
+        <result property="className" column="class_name"/>
+        <result property="contactPhone" column="contact_phone"/>
+        <result property="status" column="status"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <resultMap id="PsyCounselorProfileResult" type="PsyCounselorProfile">
+        <id property="counselorId" column="counselor_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="counselorNo" column="counselor_no"/>
+        <result property="realName" column="real_name"/>
+        <result property="title" column="title"/>
+        <result property="specialty" column="specialty"/>
+        <result property="introduction" column="introduction"/>
+        <result property="availableStatus" column="available_status"/>
+        <result property="contactPhone" column="contact_phone"/>
+        <result property="serviceScore" column="service_score"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <resultMap id="PsyEmotionRecordResult" type="PsyEmotionRecord">
+        <id property="recordId" column="record_id"/>
+        <result property="studentUserId" column="student_user_id"/>
+        <result property="anonymousFlag" column="anonymous_flag"/>
+        <result property="originalText" column="original_text"/>
+        <result property="processedText" column="processed_text"/>
+        <result property="primaryEmotion" column="primary_emotion"/>
+        <result property="emotionTags" column="emotion_tags"/>
+        <result property="confidence" column="confidence"/>
+        <result property="riskLevel" column="risk_level"/>
+        <result property="emotionScore" column="emotion_score"/>
+        <result property="analysisSummary" column="analysis_summary"/>
+        <result property="guidanceAdvice" column="guidance_advice"/>
+        <result property="warningFlag" column="warning_flag"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <resultMap id="PsyScaleResult" type="PsyScale">
+        <id property="scaleId" column="scale_id"/>
+        <result property="scaleCode" column="scale_code"/>
+        <result property="scaleName" column="scale_name"/>
+        <result property="scaleType" column="scale_type"/>
+        <result property="description" column="description"/>
+        <result property="questionCount" column="question_count"/>
+        <result property="maxScore" column="max_score"/>
+        <result property="warningThreshold" column="warning_threshold"/>
+        <result property="status" column="status"/>
+        <result property="resultTemplate" column="result_template"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <resultMap id="PsyScaleQuestionResult" type="PsyScaleQuestion">
+        <id property="questionId" column="question_id"/>
+        <result property="scaleId" column="scale_id"/>
+        <result property="questionSort" column="question_sort"/>
+        <result property="questionTitle" column="question_title"/>
+    </resultMap>
+
+    <resultMap id="PsyScaleOptionResult" type="PsyScaleOption">
+        <id property="optionId" column="option_id"/>
+        <result property="questionId" column="question_id"/>
+        <result property="optionSort" column="option_sort"/>
+        <result property="optionLabel" column="option_label"/>
+        <result property="optionScore" column="option_score"/>
+    </resultMap>
+
+    <resultMap id="PsyAssessmentRecordResult" type="PsyAssessmentRecord">
+        <id property="recordId" column="record_id"/>
+        <result property="studentUserId" column="student_user_id"/>
+        <result property="scaleId" column="scale_id"/>
+        <result property="scaleName" column="scale_name"/>
+        <result property="totalScore" column="total_score"/>
+        <result property="resultLevel" column="result_level"/>
+        <result property="resultSummary" column="result_summary"/>
+        <result property="guidanceAdvice" column="guidance_advice"/>
+        <result property="warningFlag" column="warning_flag"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <resultMap id="PsyAppointmentResult" type="PsyAppointment">
+        <id property="appointmentId" column="appointment_id"/>
+        <result property="studentUserId" column="student_user_id"/>
+        <result property="counselorUserId" column="counselor_user_id"/>
+        <result property="counselorName" column="counselor_name"/>
+        <result property="counselorTitle" column="counselor_title"/>
+        <result property="appointmentTime" column="appointment_time"/>
+        <result property="topic" column="topic"/>
+        <result property="problemDescription" column="problem_description"/>
+        <result property="status" column="status"/>
+        <result property="reviewNote" column="review_note"/>
+        <result property="counselingSummary" column="counseling_summary"/>
+        <result property="evaluationContent" column="evaluation_content"/>
+        <result property="evaluationScore" column="evaluation_score"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <resultMap id="PsyWarningResult" type="PsyWarning">
+        <id property="warningId" column="warning_id"/>
+        <result property="warningNo" column="warning_no"/>
+        <result property="studentUserId" column="student_user_id"/>
+        <result property="studentName" column="student_name"/>
+        <result property="warningSource" column="warning_source"/>
+        <result property="sourceRecordId" column="source_record_id"/>
+        <result property="riskLevel" column="risk_level"/>
+        <result property="status" column="status"/>
+        <result property="counselorUserId" column="counselor_user_id"/>
+        <result property="counselorName" column="counselor_name"/>
+        <result property="triggerSummary" column="trigger_summary"/>
+        <result property="processNote" column="process_note"/>
+        <result property="followPlan" column="follow_plan"/>
+        <result property="handledTime" column="handled_time"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <resultMap id="PsyMessageResult" type="PsyMessage">
+        <id property="messageId" column="message_id"/>
+        <result property="receiverUserId" column="receiver_user_id"/>
+        <result property="messageType" column="message_type"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="readStatus" column="read_status"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <select id="selectStudentProfileByUserId" parameterType="Long" resultMap="PsyStudentProfileResult">
+        select * from psy_student_profile where user_id = #{userId} limit 1
+    </select>
+
+    <insert id="insertStudentProfile" parameterType="PsyStudentProfile" useGeneratedKeys="true" keyProperty="studentId">
+        insert into psy_student_profile
+        (user_id, student_no, real_name, college, major, class_name, contact_phone, status, create_by, create_time, remark)
+        values
+        (#{userId}, #{studentNo}, #{realName}, #{college}, #{major}, #{className}, #{contactPhone}, #{status}, #{createBy}, sysdate(), #{remark})
+    </insert>
+
+    <select id="selectCounselorProfileByUserId" parameterType="Long" resultMap="PsyCounselorProfileResult">
+        select * from psy_counselor_profile where user_id = #{userId} limit 1
+    </select>
+
+    <insert id="insertCounselorProfile" parameterType="PsyCounselorProfile" useGeneratedKeys="true" keyProperty="counselorId">
+        insert into psy_counselor_profile
+        (user_id, counselor_no, real_name, title, specialty, introduction, available_status, contact_phone, service_score, create_by, create_time, remark)
+        values
+        (#{userId}, #{counselorNo}, #{realName}, #{title}, #{specialty}, #{introduction}, #{availableStatus}, #{contactPhone}, #{serviceScore}, #{createBy}, sysdate(), #{remark})
+    </insert>
+
+    <select id="selectStudentDashboardStats" parameterType="Long" resultType="java.util.HashMap">
+        select
+            coalesce((select risk_level from psy_emotion_record where student_user_id = #{userId} order by create_time desc limit 1), '正常') as latestRiskLevel,
+            coalesce((select count(1) from psy_assessment_record where student_user_id = #{userId}), 0) as recentAssessmentCount,
+            coalesce((select count(1) from psy_appointment where student_user_id = #{userId} and status in ('待确认', '已确认')), 0) as pendingAppointmentCount
+    </select>
+
+    <select id="selectLatestEmotionRecordByStudent" parameterType="Long" resultMap="PsyEmotionRecordResult">
+        select * from psy_emotion_record where student_user_id = #{userId} order by create_time desc limit 1
+    </select>
+
+    <select id="selectEmotionRecordListByStudent" parameterType="Long" resultMap="PsyEmotionRecordResult">
+        select * from psy_emotion_record where student_user_id = #{userId} order by create_time desc
+    </select>
+
+    <insert id="insertEmotionRecord" parameterType="PsyEmotionRecord" useGeneratedKeys="true" keyProperty="recordId">
+        insert into psy_emotion_record
+        (student_user_id, anonymous_flag, original_text, processed_text, primary_emotion, emotion_tags, confidence, risk_level, emotion_score, analysis_summary, guidance_advice, warning_flag, create_by, create_time)
+        values
+        (#{studentUserId}, #{anonymousFlag}, #{originalText}, #{processedText}, #{primaryEmotion}, #{emotionTags}, #{confidence}, #{riskLevel}, #{emotionScore}, #{analysisSummary}, #{guidanceAdvice}, #{warningFlag}, #{createBy}, sysdate())
+    </insert>
+
+    <select id="selectScaleList" parameterType="PsyScale" resultMap="PsyScaleResult">
+        select * from psy_scale
+        <where>
+            <if test="scaleName != null and scaleName != ''">
+                and scale_name like concat('%', #{scaleName}, '%')
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="scaleType != null and scaleType != ''">
+                and scale_type = #{scaleType}
+            </if>
+        </where>
+        order by scale_id desc
+    </select>
+
+    <select id="selectScaleById" parameterType="Long" resultMap="PsyScaleResult">
+        select * from psy_scale where scale_id = #{scaleId}
+    </select>
+
+    <select id="selectScaleQuestionListByScaleId" parameterType="Long" resultMap="PsyScaleQuestionResult">
+        select * from psy_scale_question where scale_id = #{scaleId} order by question_sort asc
+    </select>
+
+    <select id="selectScaleOptionListByQuestionId" parameterType="Long" resultMap="PsyScaleOptionResult">
+        select * from psy_scale_option where question_id = #{questionId} order by option_sort asc
+    </select>
+
+    <insert id="insertAssessmentRecord" parameterType="PsyAssessmentRecord" useGeneratedKeys="true" keyProperty="recordId">
+        insert into psy_assessment_record
+        (student_user_id, scale_id, scale_name, total_score, result_level, result_summary, guidance_advice, warning_flag, create_by, create_time)
+        values
+        (#{studentUserId}, #{scaleId}, #{scaleName}, #{totalScore}, #{resultLevel}, #{resultSummary}, #{guidanceAdvice}, #{warningFlag}, #{createBy}, sysdate())
+    </insert>
+
+    <insert id="insertAssessmentAnswer" parameterType="PsyAssessmentAnswer" useGeneratedKeys="true" keyProperty="answerId">
+        insert into psy_assessment_answer
+        (record_id, question_id, option_id, option_score)
+        values
+        (#{recordId}, #{questionId}, #{optionId}, #{optionScore})
+    </insert>
+
+    <select id="selectAssessmentRecordListByStudent" parameterType="Long" resultMap="PsyAssessmentRecordResult">
+        select * from psy_assessment_record where student_user_id = #{userId} order by create_time desc
+    </select>
+
+    <select id="selectCounselorList" resultMap="PsyCounselorProfileResult">
+        select * from psy_counselor_profile where available_status = '0' order by service_score desc, counselor_id asc
+    </select>
+
+    <insert id="insertAppointment" parameterType="PsyAppointment" useGeneratedKeys="true" keyProperty="appointmentId">
+        insert into psy_appointment
+        (student_user_id, counselor_user_id, appointment_time, topic, problem_description, status, create_by, create_time)
+        values
+        (#{studentUserId}, #{counselorUserId}, #{appointmentTime}, #{topic}, #{problemDescription}, #{status}, #{createBy}, sysdate())
+    </insert>
+
+    <select id="selectAppointmentListByStudent" parameterType="Long" resultMap="PsyAppointmentResult">
+        select a.*, c.real_name as counselor_name, c.title as counselor_title
+        from psy_appointment a
+        left join psy_counselor_profile c on a.counselor_user_id = c.user_id
+        where a.student_user_id = #{userId}
+        order by a.create_time desc
+    </select>
+
+    <select id="selectAppointmentListByCounselor" parameterType="Long" resultMap="PsyAppointmentResult">
+        select a.*, c.real_name as counselor_name, c.title as counselor_title
+        from psy_appointment a
+        left join psy_counselor_profile c on a.counselor_user_id = c.user_id
+        where a.counselor_user_id = #{userId}
+        order by a.create_time desc
+    </select>
+
+    <update id="updateAppointmentEvaluation">
+        update psy_appointment
+        set evaluation_content = #{evaluationContent},
+            evaluation_score = #{evaluationScore},
+            update_time = sysdate()
+        where appointment_id = #{appointmentId}
+          and student_user_id = #{studentUserId}
+    </update>
+
+    <update id="updateAppointmentReview">
+        update psy_appointment
+        set status = #{status},
+            review_note = #{reviewNote},
+            counseling_summary = #{counselingSummary},
+            update_time = sysdate()
+        where appointment_id = #{appointmentId}
+          and counselor_user_id = #{counselorUserId}
+    </update>
+
+    <select id="selectMessageListByUser" resultMap="PsyMessageResult">
+        select * from psy_message
+        where receiver_user_id = #{userId}
+        order by create_time desc
+        <if test="limit != null">
+            limit #{limit}
+        </if>
+    </select>
+
+    <select id="selectUnreadMessageCount" parameterType="Long" resultType="java.lang.Long">
+        select count(1) from psy_message where receiver_user_id = #{userId} and read_status = '0'
+    </select>
+
+    <insert id="insertMessage" parameterType="PsyMessage" useGeneratedKeys="true" keyProperty="messageId">
+        insert into psy_message
+        (receiver_user_id, message_type, title, content, read_status, create_by, create_time)
+        values
+        (#{receiverUserId}, #{messageType}, #{title}, #{content}, #{readStatus}, #{createBy}, sysdate())
+    </insert>
+
+    <select id="selectCounselorDashboardStats" parameterType="Long" resultType="java.util.HashMap">
+        select
+            coalesce((select count(1) from psy_appointment where counselor_user_id = #{userId} and date(appointment_time) = curdate()), 0) as todayAppointmentCount,
+            coalesce((select count(1) from psy_appointment where counselor_user_id = #{userId} and status = '待确认'), 0) as pendingAppointmentCount,
+            coalesce((select count(1) from psy_warning where counselor_user_id = #{userId} and risk_level = '高风险' and status in ('待处理', '处理中')), 0) as highRiskWarningCount,
+            coalesce((select count(1) from psy_appointment where counselor_user_id = #{userId} and status = '已完成' and yearweek(appointment_time, 1) = yearweek(curdate(), 1)), 0) as weekCounselingCount
+    </select>
+
+    <select id="selectWarningList" parameterType="PsyWarning" resultMap="PsyWarningResult">
+        select w.*,
+               sp.real_name as student_name,
+               cp.real_name as counselor_name
+        from psy_warning w
+        left join psy_student_profile sp on w.student_user_id = sp.user_id
+        left join psy_counselor_profile cp on w.counselor_user_id = cp.user_id
+        <where>
+            <if test="warningId != null">
+                and w.warning_id = #{warningId}
+            </if>
+            <if test="studentUserId != null">
+                and w.student_user_id = #{studentUserId}
+            </if>
+            <if test="counselorUserId != null">
+                and w.counselor_user_id = #{counselorUserId}
+            </if>
+            <if test="riskLevel != null and riskLevel != ''">
+                and w.risk_level = #{riskLevel}
+            </if>
+            <if test="status != null and status != ''">
+                and w.status = #{status}
+            </if>
+            <if test="warningSource != null and warningSource != ''">
+                and w.warning_source = #{warningSource}
+            </if>
+            <if test="studentName != null and studentName != ''">
+                and sp.real_name like concat('%', #{studentName}, '%')
+            </if>
+        </where>
+        order by field(w.status, '待处理', '处理中', '已处理'), field(w.risk_level, '高风险', '中风险', '关注', '正常'), w.create_time desc
+    </select>
+
+    <select id="selectWarningById" parameterType="Long" resultMap="PsyWarningResult">
+        select w.*,
+               sp.real_name as student_name,
+               cp.real_name as counselor_name
+        from psy_warning w
+        left join psy_student_profile sp on w.student_user_id = sp.user_id
+        left join psy_counselor_profile cp on w.counselor_user_id = cp.user_id
+        where w.warning_id = #{warningId}
+    </select>
+
+    <insert id="insertWarning" parameterType="PsyWarning" useGeneratedKeys="true" keyProperty="warningId">
+        insert into psy_warning
+        (warning_no, student_user_id, warning_source, source_record_id, risk_level, status, counselor_user_id, trigger_summary, process_note, follow_plan, create_by, create_time)
+        values
+        (#{warningNo}, #{studentUserId}, #{warningSource}, #{sourceRecordId}, #{riskLevel}, #{status}, #{counselorUserId}, #{triggerSummary}, #{processNote}, #{followPlan}, #{createBy}, sysdate())
+    </insert>
+
+    <update id="updateWarning" parameterType="PsyWarning">
+        update psy_warning
+        <set>
+            <if test="riskLevel != null and riskLevel != ''">risk_level = #{riskLevel},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="counselorUserId != null">counselor_user_id = #{counselorUserId},</if>
+            <if test="processNote != null">process_note = #{processNote},</if>
+            <if test="followPlan != null">follow_plan = #{followPlan},</if>
+            <if test="handledTime != null">handled_time = #{handledTime},</if>
+            <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+            update_time = sysdate()
+        </set>
+        where warning_id = #{warningId}
+    </update>
+
+    <select id="selectFirstAvailableCounselorUserId" resultType="java.lang.Long">
+        select user_id from psy_counselor_profile where available_status = '0' order by service_score desc, counselor_id asc limit 1
+    </select>
+
+    <select id="selectCounselorTransferOptions" resultType="java.util.HashMap">
+        select user_id as value, concat(real_name, ' / ', title) as label
+        from psy_counselor_profile
+        where available_status = '0'
+        order by service_score desc, counselor_id asc
+    </select>
+
+    <select id="selectAdminDashboardStats" resultType="java.util.HashMap">
+        select 1
+    </select>
+
+    <select id="selectStudentCount" resultType="java.lang.Long">
+        select count(1) from psy_student_profile
+    </select>
+
+    <select id="selectCounselorCount" resultType="java.lang.Long">
+        select count(1) from psy_counselor_profile
+    </select>
+
+    <select id="selectAssessmentCount" resultType="java.lang.Long">
+        select count(1) from psy_assessment_record
+    </select>
+
+    <select id="selectWarningCount" resultType="java.lang.Long">
+        select count(1) from psy_warning
+    </select>
+
+    <insert id="insertScale" parameterType="PsyScale" useGeneratedKeys="true" keyProperty="scaleId">
+        insert into psy_scale
+        (scale_code, scale_name, scale_type, description, question_count, max_score, warning_threshold, status, result_template, create_by, create_time, remark)
+        values
+        (#{scaleCode}, #{scaleName}, #{scaleType}, #{description}, #{questionCount}, #{maxScore}, #{warningThreshold}, #{status}, #{resultTemplate}, #{createBy}, sysdate(), #{remark})
+    </insert>
+
+    <update id="updateScale" parameterType="PsyScale">
+        update psy_scale
+        <set>
+            <if test="scaleCode != null">scale_code = #{scaleCode},</if>
+            <if test="scaleName != null">scale_name = #{scaleName},</if>
+            <if test="scaleType != null">scale_type = #{scaleType},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="questionCount != null">question_count = #{questionCount},</if>
+            <if test="maxScore != null">max_score = #{maxScore},</if>
+            <if test="warningThreshold != null">warning_threshold = #{warningThreshold},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="resultTemplate != null">result_template = #{resultTemplate},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            update_time = sysdate()
+        </set>
+        where scale_id = #{scaleId}
+    </update>
+
+</mapper>

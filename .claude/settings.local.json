@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mv ruoyi-admin *)",
+      "Bash(mv ruoyi-framework *)",
+      "Bash(mv ruoyi-system *)",
+      "Bash(mv ruoyi-quartz *)",
+      "Bash(mv ruoyi-generator *)",
+      "Bash(mvn clean *)",
+      "Bash(cd /d)",
+      "Bash(cat \"C:\\\\Users\\\\Naruto\\\\Pictures\\\\610e9ad0-3e43-457a-a79a-470ba4eab895.png\")",
+      "WebFetch(domain:)",
+      "Bash(mvn spring-boot:run)",
+      "Bash(mvn install *)",
+      "Bash(where mvn *)",
+      "Bash(mvn -version)",
+      "Bash(mvn *)",
+      "Skill(update-config)",
+      "Bash(git add *)",
+      "Bash(gh auth *)",
+      "Bash(git init *)"
+    ]
+  }
+}
